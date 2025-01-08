@@ -1,6 +1,6 @@
 'use client'
 
-import React, { createContext, useContext, useState, useEffect } from 'react'
+import React, { createContext, useContext, useState, useCallback, useEffect } from 'react'
 import { Product } from '@/types/product'
 
 interface CartItem extends Product {
@@ -48,9 +48,9 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
     setCart(prevCart => prevCart.filter(item => item.id !== productId))
   }
 
-  const clearCart = () => {
-    setCart([])
-  }
+  const clearCart = useCallback(() => {
+    setCart([]);
+  }, []);
 
   const totalItems = cart.reduce((total, item) => total + item.quantity, 0)
   const totalPrice = cart.reduce((total, item) => total + item.price * item.quantity, 0)
