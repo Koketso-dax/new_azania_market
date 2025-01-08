@@ -1,8 +1,9 @@
 'use client'
 
-import { useCart } from '../../contexts/CardContext'
+import { useCart } from '@/contexts/CardContext'
 import { Button } from '@/components/ui/button'
 import Image from 'next/image'
+import Link from 'next/link'
 
 export default function CartPage() {
   const { cart, removeFromCart, clearCart, totalPrice } = useCart()
@@ -46,7 +47,9 @@ export default function CartPage() {
         <Button variant="outline" onClick={clearCart}>Clear Cart</Button>
         <p className="text-xl font-bold">Total: ${totalPrice.toFixed(2)}</p>
       </div>
-      <Button className="w-full">Proceed to Checkout</Button>
+      <Link href="/checkout">
+        <Button className="w-full">Proceed to Checkout</Button>
+      </Link>
     </div>
   )
 }
