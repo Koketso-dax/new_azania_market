@@ -63,7 +63,7 @@ Featured Products Section: Renders a grid of product cards.
 
 - Navigation: Includes a button to view all products.
 
-`ProductCard` ## Component
+`ProductCard` **Component**
 
 - Displays product details, including image, title, price, and category.
 
