@@ -1,52 +1,64 @@
-'use client'
+'use client' // Indicates the use of client-side rendering for this component
 
+// Import necessary hooks and components
 import { useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { Button } from '@/components/ui/button'
-import { supabase } from '@/lib/supabase-client'
-import { User } from '@supabase/supabase-js'
+import { supabase } from '@/lib/supabase-client' // Supabase client for authentication
+import { User } from '@supabase/supabase-js' // Type definition for Supabase User
 
+// Define the ProfilePage component
 export default function ProfilePage() {
+  // State to manage the current user and loading status
   const [user, setUser] = useState<User | null>(null)
   const [loading, setLoading] = useState(true)
-  const router = useRouter()
+  const router = useRouter() // Router for navigation
 
+  // Effect to fetch the authenticated user's information
   useEffect(() => {
     const fetchUser = async () => {
       try {
+
+        // Get the current session
         const { data: { session } } = await supabase.auth.getSession()
         if (session) {
+
+          // If a session exists, fetch the user details
           const { data: { user } } = await supabase.auth.getUser()
           setUser(user)
         } else {
+          // If no session exists, set user to null
           setUser(null)
         }
       } catch (error) {
-        console.error('Error fetching user:', error)
+        console.error('Error fetching user:', error) // Handle Log errors
         setUser(null)
       } finally {
-        setLoading(false)
+        setLoading(false) // Set loading to false after fetching
       }
     }
 
-    fetchUser()
+    fetchUser() // Trigger the fetch function on component mount
   }, [])
 
+  // Handle user sign-out
   const handleSignOut = async () => {
     try {
       const { error } = await supabase.auth.signOut()
       if (error) throw error
-      setUser(null)
-      router.push('/')
+      setUser(null) // Clear user state after sign-out
+      router.push('/') // Redirect to the home page
     } catch (error) {
-      console.error('Error signing out:', error)
+      console.error('Error signing out:', error) // Log errors
     }
   }
 
+  // Display a loading spinner while fetching user data
   if (loading) {
     return <div className="text-center">Loading...</div>
   }
 
+  // Render a message if the user is not signed in
   if (!user) {
     return (
       <div className="space-y-8 text-center">
@@ -65,6 +77,7 @@ export default function ProfilePage() {
     )
   }
 
+  // Render the user's profile details if signed in
   return (
     <div className="space-y-8">
       <h1 className="text-3xl font-bold">Your Profile</h1>
@@ -77,4 +90,3 @@ export default function ProfilePage() {
     </div>
   )
 }
-
