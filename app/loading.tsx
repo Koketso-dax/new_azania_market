@@ -1,5 +1,7 @@
+// Import the Skeleton component for creating loading placeholders
 import { Skeleton } from "@/components/ui/skeleton"
 
+// Define the Loading component for displaying skeleton loaders
 export default function Loading() {
   return (
     <div className="space-y-8">
@@ -17,4 +19,3 @@ export default function Loading() {
     </div>
   )
 }
-
