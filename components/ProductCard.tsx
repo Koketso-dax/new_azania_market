@@ -1,11 +1,12 @@
 'use client'
 
 import Image from 'next/image'
+import { useState } from 'react'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/card'
-import { useToast } from '../hooks/use-toast'
+import { useToast } from '@/hooks/use-toast'
 import type { Product } from '@/types/product'
-import { useCart } from '../contexts/CardContext'
+import { useCart } from '@/contexts/CardContext'
 
 interface ProductCardProps {
   product: Product
@@ -14,6 +15,7 @@ interface ProductCardProps {
 export function ProductCard({ product }: ProductCardProps) {
   const { addToCart } = useCart()
   const { toast } = useToast()
+  const [imageError, setImageError] = useState(false)
 
   const handleAddToCart = () => {
     addToCart(product)
@@ -23,6 +25,10 @@ export function ProductCard({ product }: ProductCardProps) {
     })
   }
 
+  const handleImageError = () => {
+    setImageError(true)
+  }
+
   return (
     <Card className="flex flex-col h-full">
       <CardHeader>
@@ -30,13 +36,20 @@ export function ProductCard({ product }: ProductCardProps) {
       </CardHeader>
       <CardContent className="flex-grow">
         <div className="relative w-full h-48 mb-4">
-          <Image
-            src={product.image}
-            alt={product.title}
-            fill
-            className="object-contain"
-            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-          />
+          {imageError ? (
+            <div className="w-full h-full flex items-center justify-center bg-gray-200 text-gray-500">
+              Image not available
+            </div>
+          ) : (
+            <Image
+              src={product.image}
+              alt={product.title}
+              fill
+              className="object-contain"
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+              onError={handleImageError}
+            />
+          )}
         </div>
         <p className="text-lg font-bold">${product.price.toFixed(2)}</p>
         <p className="text-sm text-gray-500 capitalize">{product.category}</p>
