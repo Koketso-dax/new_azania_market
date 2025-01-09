@@ -1,13 +1,17 @@
 'use client'
 
-import { useCart } from '@/contexts/CardContext'
-import { Button } from '@/components/ui/button'
-import Image from 'next/image'
-import Link from 'next/link'
+// Import necessary dependencies and components
+import { useCart } from '@/contexts/CardContext' // Custom hook for managing cart state
+import { Button } from '@/components/ui/button' // Reusable button component
+import Image from 'next/image' // Optimized image component from Next.js
+import Link from 'next/link' // Next.js component for client-side navigation
 
+// Component to display the shopping cart page
 export default function CartPage() {
+  // Destructure cart-related functionalities from the custom Cart context
   const { cart, removeFromCart, clearCart, totalPrice } = useCart()
 
+  // Handle the case where the cart is empty
   if (cart.length === 0) {
     return (
       <div className="text-center">
@@ -17,6 +21,7 @@ export default function CartPage() {
     )
   }
 
+  // Render the cart page when items are present
   return (
     <div className="space-y-8">
       <h1 className="text-3xl font-bold">Your Cart</h1>
@@ -53,4 +58,3 @@ export default function CartPage() {
     </div>
   )
 }
-
