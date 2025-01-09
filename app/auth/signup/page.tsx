@@ -9,6 +9,7 @@ import { supabase } from '@/lib/supabase-client'
 import { AuthError } from '@supabase/supabase-js'
 
 export default function SignUp() {
+  // declare state variables and router for redirect
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [error, setError] = useState<AuthError | null>(null)
