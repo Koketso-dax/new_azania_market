@@ -1,4 +1,4 @@
-/ Import the ProductCard component to display individual product details
+// Import the ProductCard component to display individual product details
 import { ProductCard } from '../../components/ProductCard'
 
 // Import the Product type to define the structure of product data
