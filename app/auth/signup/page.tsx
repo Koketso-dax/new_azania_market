@@ -11,7 +11,7 @@ import { AuthError } from '@supabase/supabase-js' // TypeScript type for Supabas
 
 // Define the SignUp component for user registration
 export default function SignUp() {
-  // State to manage email input
+  // declare state variables and router for redirect
   const [email, setEmail] = useState('')
   // State to manage password input
   const [password, setPassword] = useState('')
