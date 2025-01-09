@@ -1,31 +1,39 @@
-'use client'
+'use client' // Enable client-side rendering for this component
 
-import { useState } from 'react'
-import { useRouter } from 'next/navigation'
-import Link from 'next/link'
-import { Button } from '@/components/ui/button'
-import { Input } from '@/components/ui/input'
-import { supabase } from '@/lib/supabase-client'
-import { AuthError } from '@supabase/supabase-js'
+// Import required hooks and components
+import { useState } from 'react' // React hook for managing component state
+import { useRouter } from 'next/navigation' // Next.js router for programmatic navigation
+import Link from 'next/link' // Next.js Link component for navigation
+import { Button } from '@/components/ui/button' // Custom Button component for UI consistency
+import { Input } from '@/components/ui/input' // Custom Input component for styled form inputs
+import { supabase } from '@/lib/supabase-client' // Supabase client for authentication
+import { AuthError } from '@supabase/supabase-js' // TypeScript type for Supabase authentication errors
 
+// Define the SignUp component for user registration
 export default function SignUp() {
   // declare state variables and router for redirect
   const [email, setEmail] = useState('')
+  // State to manage password input
   const [password, setPassword] = useState('')
+  // State to store and display authentication errors
   const [error, setError] = useState<AuthError | null>(null)
+  // Hook to enable navigation
   const router = useRouter()
 
+  // Function to handle the sign-up process
   const handleSignUp = async (e: React.FormEvent) => {
-    e.preventDefault()
+    e.preventDefault() // Prevent the default form submission behavior
     try {
+      // Attempt to sign up with email and password using Supabase
       const { error } = await supabase.auth.signUp({ email, password })
-      if (error) throw error
-      router.push('/auth/signin')
+      if (error) throw error // Throw error if sign-up fails
+      router.push('/auth/signin') // Redirect to the sign-in page upon successful registration
     } catch (error) {
-      setError(error as AuthError)
+      setError(error as AuthError) // Update the error state if sign-up fails
     }
   }
 
+  // JSX structure for the sign-up form
   return (
     <div className="max-w-md mx-auto space-y-8">
       <h1 className="text-2xl font-bold text-center">Sign Up</h1>
@@ -56,4 +64,3 @@ export default function SignUp() {
     </div>
   )
 }
-
