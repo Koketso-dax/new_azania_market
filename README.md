@@ -101,5 +101,11 @@ Featured Products Section: Renders a grid of product cards.
 5. Open a Pull Request.
 
 ## License
+This project is licensed under the MIT License.
 
 ## Contact
+ - **GitHub:** https://github.com/jordanmefujie
+ - **Email:** mjordanlonpo@gmail.com
+
+ - **GitHub:** https://github.com/Koketso-dax
+ - **Email:** Lanchaster.k@gmail.com 
