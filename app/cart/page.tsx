@@ -1,7 +1,7 @@
 'use client'
 
 // Import necessary dependencies and components
-import { useCart } from '@/contexts/CardContext' // Custom hook for managing cart state
+import { useCart } from '@/contexts/CartContext' // Custom hook for managing cart state
 import { Button } from '@/components/ui/button' // Reusable button component
 import Image from 'next/image' // Optimized image component from Next.js
 import Link from 'next/link' // Next.js component for client-side navigation

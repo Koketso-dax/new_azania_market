@@ -6,7 +6,7 @@ import { useRouter } from 'next/navigation' // Next.js router for navigation
 import { Button } from '@/components/ui/button' // Reusable button component
 import { Input } from '@/components/ui/input' // Reusable input component
 import { useToast } from '@/hooks/use-toast' // Custom hook for displaying toast notifications
-import { useCart } from '@/contexts/CardContext' // Custom hook for managing cart state
+import { useCart } from '@/contexts/CartContext' // Custom hook for managing cart state
 import { supabase } from '@/lib/supabase-client' // Supabase client for user authentication and data fetching
 import { User } from '@supabase/supabase-js' // Supabase User type
 

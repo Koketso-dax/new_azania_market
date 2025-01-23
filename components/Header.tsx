@@ -1,26 +1,31 @@
-'use client'
+"use client"
 
-import Link from 'next/link'
-import { ShoppingCart, User } from 'lucide-react'
-import { Button } from '@/components/ui/button'
-import { useRouter } from 'next/navigation'
-import { useCart } from '@/contexts/CardContext'
-import { useEffect, useState } from 'react'
-import { supabase } from '@/lib/supabase-client'
-import { User as SupabaseUser } from '@supabase/supabase-js'
+import Link from "next/link"
+import { ShoppingCart, User } from "lucide-react"
+import { Button } from "@/components/ui/button"
+import { useRouter } from "next/navigation"
+import { useCart } from "@/contexts/CartContext"
+import { useEffect, useState } from "react"
+import { supabase } from "@/lib/supabase-client"
+import type { User as SupabaseUser } from "@supabase/supabase-js"
 
 const Header = () => {
   const router = useRouter()
-  const { totalItems } = useCart()
+  const { totalItems, clearCart } = useCart()
   const [user, setUser] = useState<SupabaseUser | null>(null)
 
   useEffect(() => {
     const fetchUser = async () => {
-      const { data: { user } } = await supabase.auth.getUser()
+      const {
+        data: { user },
+      } = await supabase.auth.getUser()
       setUser(user)
+      if (!user) {
+        clearCart() // Clear the cart when no user is found (e.g., after logout)
+      }
     }
     fetchUser()
-  }, [])
+  }, [clearCart])
 
   return (
     <header className="bg-white shadow-sm">
@@ -39,7 +44,7 @@ const Header = () => {
               <Button
                 variant="ghost"
                 size="icon"
-                onClick={() => router.push('/cart')}
+                onClick={() => router.push("/cart")}
                 aria-label="Shopping Cart"
                 className="relative"
               >
@@ -53,20 +58,11 @@ const Header = () => {
             </li>
             <li>
               {user ? (
-                <Button
-                  variant="ghost"
-                  size="sm"
-                  onClick={() => router.push('/profile')}
-                >
+                <Button variant="ghost" size="sm" onClick={() => router.push("/profile")}>
                   {user.email}
                 </Button>
               ) : (
-                <Button
-                  variant="ghost"
-                  size="icon"
-                  onClick={() => router.push('/auth/signin')}
-                  aria-label="Sign In"
-                >
+                <Button variant="ghost" size="icon" onClick={() => router.push("/auth/signin")} aria-label="Sign In">
                   <User className="h-5 w-5" />
                 </Button>
               )}

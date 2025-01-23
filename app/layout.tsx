@@ -12,7 +12,7 @@ import Header from '../components/Header'
 import Footer from '../components/Footer'
 
 // Import the CartProvider context to manage cart state globally
-import { CartProvider } from '../contexts/CardContext'
+import { CartProvider } from '../contexts/CartContext'
 
 // Initialize the Inter font with Latin subset for typography
 const inter = Inter({ subsets: ['latin'] })

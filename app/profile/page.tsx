@@ -6,6 +6,8 @@ import { useRouter } from 'next/navigation'
 import { Button } from '@/components/ui/button'
 import { supabase } from '@/lib/supabase-client' // Supabase client for authentication
 import { User } from '@supabase/supabase-js' // Type definition for Supabase User
+import { useCart } from '@/contexts/CartContext'
+
 
 // Define the ProfilePage component
 export default function ProfilePage() {
@@ -13,6 +15,7 @@ export default function ProfilePage() {
   const [user, setUser] = useState<User | null>(null)
   const [loading, setLoading] = useState(true)
   const router = useRouter() // Router for navigation
+  const { clearCart } = useCart()
 
   // Effect to fetch the authenticated user's information
   useEffect(() => {
@@ -47,6 +50,7 @@ export default function ProfilePage() {
       const { error } = await supabase.auth.signOut()
       if (error) throw error
       setUser(null) // Clear user state after sign-out
+      clearCart() // Clear the cart when signing out
       router.push('/') // Redirect to the home page
     } catch (error) {
       console.error('Error signing out:', error) // Log errors

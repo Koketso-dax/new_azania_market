@@ -6,7 +6,7 @@ import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/card'
 import { useToast } from '@/hooks/use-toast'
 import type { Product } from '@/types/product'
-import { useCart } from '@/contexts/CardContext'
+import { useCart } from '@/contexts/CartContext'
 
 interface ProductCardProps {
   product: Product

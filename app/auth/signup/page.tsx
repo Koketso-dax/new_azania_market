@@ -2,7 +2,6 @@
 
 // Import required hooks and components
 import { useState } from 'react' // React hook for managing component state
-import { useRouter } from 'next/navigation' // Next.js router for programmatic navigation
 import Link from 'next/link' // Next.js Link component for navigation
 import { Button } from '@/components/ui/button' // Custom Button component for UI consistency
 import { Input } from '@/components/ui/input' // Custom Input component for styled form inputs
@@ -13,22 +12,23 @@ import { AuthError } from '@supabase/supabase-js' // TypeScript type for Supabas
 export default function SignUp() {
   // declare state variables and router for redirect
   const [email, setEmail] = useState('')
-  // State to manage password input
   const [password, setPassword] = useState('')
-  // State to store and display authentication errors
   const [error, setError] = useState<AuthError | null>(null)
-  // Hook to enable navigation
-  const router = useRouter()
+  const [message, setMessage] = useState("")
 
   // Function to handle the sign-up process
   const handleSignUp = async (e: React.FormEvent) => {
     e.preventDefault() // Prevent the default form submission behavior
     try {
       // Attempt to sign up with email and password using Supabase
-      const { error } = await supabase.auth.signUp({ email, password })
-      if (error) throw error // Throw error if sign-up fails
-      router.push('/auth/signin') // Redirect to the sign-in page upon successful registration
-    } catch (error) {
+      const { error } = await supabase.auth.signUp({ email, password,
+        options: {
+          emailRedirectTo: `${window.location.origin}/auth/callback`,
+        },
+       })
+      if (error) throw error // throw error on fail
+      setMessage("Check your email for the confirmation link.")
+      }catch (error){
       setError(error as AuthError) // Update the error state if sign-up fails
     }
   }
@@ -38,14 +38,9 @@ export default function SignUp() {
     <div className="max-w-md mx-auto space-y-8">
       <h1 className="text-2xl font-bold text-center">Sign Up</h1>
       {error && <p className="text-red-500 text-center">{error.message}</p>}
+      {message && <p className="text-green-500 text-center">{message}</p>}
       <form onSubmit={handleSignUp} className="space-y-4">
-        <Input
-          type="email"
-          placeholder="Email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          required
-        />
+        <Input type="email" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} required />
         <Input
           type="password"
           placeholder="Password"
@@ -53,10 +48,12 @@ export default function SignUp() {
           onChange={(e) => setPassword(e.target.value)}
           required
         />
-        <Button type="submit" className="w-full">Sign Up</Button>
+        <Button type="submit" className="w-full">
+          Sign Up
+        </Button>
       </form>
       <p className="text-center">
-        Already have an account?{' '}
+        Already have an account?{" "}
         <Link href="/auth/signin" className="text-blue-500 hover:underline">
           Sign In
         </Link>
