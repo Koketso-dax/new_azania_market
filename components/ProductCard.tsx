@@ -1,32 +1,39 @@
+// Indicates that this component is rendered on the client-side in Next.js
 'use client'
 
-import Image from 'next/image'
-import { useState } from 'react'
-import { Button } from '@/components/ui/button'
+// Import required modules and components
+import Image from 'next/image' // Next.js Image component for optimized image handling
+import { useState } from 'react' // React hook for managing local state
+import { Button } from '@/components/ui/button' // Custom reusable button component
+// Custom card components for consistent UI
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/card'
-import { useToast } from '@/hooks/use-toast'
-import type { Product } from '@/types/product'
-import { useCart } from '@/contexts/CartContext'
+import { useToast } from '@/hooks/use-toast' // Hook to display toast notifications
+import type { Product } from '@/types/product' // Type definition for the Product object
+import { useCart } from '@/contexts/CartContext' // Custom context for managing cart state
 
+// Define the interface for ProductCard props
 interface ProductCardProps {
-  product: Product
+  product: Product // Expects a single product of type Product
 }
 
+// Component to display a product card
 export function ProductCard({ product }: ProductCardProps) {
-  const { addToCart } = useCart()
-  const { toast } = useToast()
-  const [imageError, setImageError] = useState(false)
+  const { addToCart } = useCart() // Retrieve the addToCart function from the CartContext
+  const { toast } = useToast() // Retrieve the toast function for displaying notifications
+  const [imageError, setImageError] = useState(false) // State to track image load errors
 
+  // Function to handle adding a product to the cart
   const handleAddToCart = () => {
-    addToCart(product)
+    addToCart(product) // Add the product to the cart
     toast({
-      title: "Added to cart",
-      description: `${product.title} has been added to your cart.`,
+      title: "Added to cart", // Notification title
+      description: `${product.title} has been added to your cart.`, // Notification description
     })
   }
 
+  // Function to handle errors when loading the product image
   const handleImageError = () => {
-    setImageError(true)
+    setImageError(true) // Update state to indicate an image load error
   }
 
   return (
@@ -42,7 +49,7 @@ export function ProductCard({ product }: ProductCardProps) {
             </div>
           ) : (
             <Image
-              src={product.image}
+              src={product.image} 
               alt={product.title}
               fill
               className="object-contain"
