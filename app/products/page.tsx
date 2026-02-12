@@ -1,3 +1,5 @@
+export const dynamic = 'force-dynamic';
+
 // Import the ProductCard component to display individual product details
 import { ProductCard } from '../../components/ProductCard'
 
