@@ -1,22 +1,22 @@
 // Import necessary modules and components
-export const dynamic = 'force-dynamic';
 import Link from 'next/link' // Provides client-side navigation in a Next.js app
 import { ProductCard } from '../components/ProductCard' // Custom component for displaying product details
 import { Button } from '@/components/ui/button' // Custom button component for consistent UI styling
 import type { Product } from '@/types/product' // TypeScript type for product objects
 
+
 // Function to fetch featured products from a fake API
 async function getFeaturedProducts(): Promise<Product[]> {
   // Fetch 3 products from the Fake Store API
+  try {
   const res = await fetch('https://fakestoreapi.com/products?limit=3')
-
-  // Handle unsuccessful responses by throwing an error
-  if (!res.ok) {
-    return []
-  }
-
   // Return the fetched data as JSON
   return res.json()
+}
+  catch(error){
+    // Exception on fail
+    throw new Error('Failed to fetch products')
+  }
 }
 
 // Main functional component for the Home page
