@@ -4,18 +4,18 @@ import { ProductCard } from '../../components/ProductCard'
 // Import the Product type to define the structure of product data
 import type { Product } from '../../types/product'
 
-// Function to fetch products from a fake API and return them as a list of Product objects
+// Function to fetch featured products from a fake API
 async function getProducts(): Promise<Product[]> {
-  // Make a request to the fake store API
+  // Fetch 3 products from the Fake Store API
+  try {
   const res = await fetch('https://fakestoreapi.com/products')
-
-  // Check if the response is successful; throw an error if not
-  if (!res.ok) {
+  // Return the fetched data as JSON
+  return res.json()
+}
+  catch(error){
+    // Exception on fail
     throw new Error('Failed to fetch products')
   }
-  
-  // Parse and return the response JSON as an array of products
-  return res.json()
 }
 
 // Define and export the ProductsPage component as the default export
