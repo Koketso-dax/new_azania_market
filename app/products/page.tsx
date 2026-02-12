@@ -1,4 +1,5 @@
 // Import the ProductCard component to display individual product details
+import { headers } from 'next/headers'
 import { ProductCard } from '../../components/ProductCard'
 
 // Import the Product type to define the structure of product data
@@ -7,7 +8,8 @@ import type { Product } from '../../types/product'
 // Function to fetch featured products from a fake API
 async function getProducts(): Promise<Product[]> {
   try {
-    const res = await fetch('https://fakestoreapi.com/products')
+    const res = await fetch('https://fakestoreapi.com/products',
+      {headers: {'User-Agent': 'Mozilla/5.0'}})
     if (!res.ok) {
       throw new Error(`API responded with status ${res.status}`)
     }
