@@ -1,4 +1,5 @@
 // Import necessary modules and components
+export const dynamic = 'force-dynamic';
 import Link from 'next/link' // Provides client-side navigation in a Next.js app
 import { ProductCard } from '../components/ProductCard' // Custom component for displaying product details
 import { Button } from '@/components/ui/button' // Custom button component for consistent UI styling
