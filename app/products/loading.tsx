@@ -1,3 +1,4 @@
+'use client'
 // Import the Skeleton component for displaying loading placeholders
 import { Skeleton } from "../../components/ui/skeleton"
 
