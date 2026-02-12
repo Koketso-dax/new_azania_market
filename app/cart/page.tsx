@@ -1,3 +1,5 @@
+'use client'
+
 // Import necessary dependencies and components
 import { useCart } from '@/contexts/CartContext' // Custom hook for managing cart state
 import { Button } from '@/components/ui/button' // Reusable button component
