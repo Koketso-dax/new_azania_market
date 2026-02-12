@@ -9,7 +9,7 @@ import type { Product } from '@/types/product' // TypeScript type for product ob
 async function getFeaturedProducts(): Promise<Product[]> {
   // Fetch 3 products from the Fake Store API
   try {
-  const res = await fetch('https://fakestoreapi.com/products?limit=3')
+  const res = await fetch('https://fakestoreapi.com/products')
   // Return the fetched data as JSON
   return res.json()
 }
