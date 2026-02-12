@@ -1,3 +1,4 @@
+"use client";
 // Import necessary modules and components
 import Link from 'next/link' // Provides client-side navigation in a Next.js app
 import { ProductCard } from '../components/ProductCard' // Custom component for displaying product details
