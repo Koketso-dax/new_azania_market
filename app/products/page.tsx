@@ -1,3 +1,4 @@
+'use client'
 // Import the ProductCard component to display individual product details
 import { ProductCard } from '../../components/ProductCard'
 
