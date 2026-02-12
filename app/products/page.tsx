@@ -1,4 +1,3 @@
-'use client'
 // Import the ProductCard component to display individual product details
 import { ProductCard } from '../../components/ProductCard'
 
@@ -7,15 +6,15 @@ import type { Product } from '../../types/product'
 
 // Function to fetch featured products from a fake API
 async function getProducts(): Promise<Product[]> {
-  // Fetch 3 products from the Fake Store API
   try {
-  const res = await fetch('https://fakestoreapi.com/products')
-  // Return the fetched data as JSON
-  return res.json()
-}
-  catch(error){
-    // Exception on fail
-    throw new Error('Failed to fetch products')
+    const res = await fetch('https://fakestoreapi.com/products')
+    if (!res.ok) {
+      throw new Error(`API responded with status ${res.status}`)
+    }
+    return res.json()
+  } catch (error) {
+    console.error('Failed to fetch products:', error)
+    return []
   }
 }
 

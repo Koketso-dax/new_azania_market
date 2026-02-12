@@ -7,15 +7,15 @@ import type { Product } from '@/types/product' // TypeScript type for product ob
 
 // Function to fetch featured products from a fake API
 async function getFeaturedProducts(): Promise<Product[]> {
-  // Fetch 3 products from the Fake Store API
   try {
-  const res = await fetch('https://fakestoreapi.com/products')
-  // Return the fetched data as JSON
-  return res.json()
-}
-  catch(error){
-    // Exception on fail
-    throw new Error('Failed to fetch products')
+    const res = await fetch('https://fakestoreapi.com/products?limit=3')
+    if (!res.ok) {
+      throw new Error(`API responded with status ${res.status}`)
+    }
+    return res.json()
+  } catch (error) {
+    console.error('Failed to fetch products:', error)
+    return [] // return empty array so the page still renders
   }
 }
 
