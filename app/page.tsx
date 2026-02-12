@@ -11,7 +11,7 @@ async function getFeaturedProducts(): Promise<Product[]> {
 
   // Handle unsuccessful responses by throwing an error
   if (!res.ok) {
-    throw new Error('Failed to fetch products')
+    return []
   }
 
   // Return the fetched data as JSON
