@@ -17,6 +17,7 @@
 ## Installation
 
 ## Prerequisites
+
 - Node.js (version 16 or higher recommended)
 - A package manager: `npm`, `yarn`, `pnpm`, or `bun`
 
@@ -57,9 +58,10 @@ npm start
 ```
 
 ## Key Components
+
 - `Home` **Page**
-**API Call:** Fetches featured products from `https://fakestoreapi.com/products?limit=3.`
-Featured Products Section: Renders a grid of product cards.
+  **API Call:** Fetches featured products from `https://fakestoreapi.com/products?limit=3.`
+  Featured Products Section: Renders a grid of product cards.
 
 - Navigation: Includes a button to view all products.
 
@@ -75,10 +77,12 @@ Featured Products Section: Renders a grid of product cards.
 
 - The `getFeaturedProducts` function fetches data from the Fake Store API during the server-side rendering phase.
 - Ensures SEO benefits and a better user experience.
+
 2. **Reusable UI Components:**
 
 - `Button`: A styled, reusable button component with variants.
 - `ProductCard`: A self-contained component to display product information.
+
 3. **Environment Variables:**
 
 - Supabase integration is pre-configured but requires setup in `.env.local`.
@@ -94,6 +98,7 @@ Featured Products Section: Renders a grid of product cards.
 - **Tailwind CSS:** Utility-first CSS framework for styling.
 
 ## Contributing
+
 1. Fork the repository.
 2. Create a new branch: `git checkout -b feature-name`.
 3. Make your changes and commit: `git commit -m "Add some feature"`.
@@ -101,11 +106,10 @@ Featured Products Section: Renders a grid of product cards.
 5. Open a Pull Request.
 
 ## License
+
 This project is licensed under the MIT License.
 
 ## Contact
- - **GitHub:** https://github.com/jordanmefujie
- - **Email:** mjordanlonpo@gmail.com
 
- - **GitHub:** https://github.com/Koketso-dax
- - **Email:** Lanchaster.k@gmail.com 
+- **GitHub:** https://github.com/Koketso-dax
+- **Email:** Lanchaster.k@gmail.com
